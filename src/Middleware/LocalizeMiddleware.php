@@ -2,21 +2,35 @@
 
 namespace DeveoDK\Core\Localize\Middleware;
 
+use Carbon\Carbon;
 use Closure;
+use DeveoDK\Core\Localize\Models\Localize;
+use Illuminate\Http\Request;
 
 class LocalizeMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Handle the setting of locale and localize helpers default timezone
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param  Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if ($request->age <= 200) {
-            return redirect('home');
+        $config = config('core.localize');
+        $preferedLanguage = $request->getPreferredLanguage();
+
+        if (!key_exists($preferedLanguage, $config['languages'])) {
+            return $next($request);
+        }
+
+        $language = $config['languages'][$preferedLanguage];
+        app()->setLocale($language);
+        Carbon::setLocale($language);
+
+        if (key_exists($language, $config['timezones'])) {
+            Localize::setDefaultTimezone($config['timezones'][$language]);
         }
 
         return $next($request);

@@ -12,6 +12,13 @@
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.7"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DeveoDK\\Core\\Localize\\LocalizeServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "license": "MIT"
