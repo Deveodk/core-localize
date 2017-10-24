@@ -15,6 +15,7 @@ return [
         'en' => 'UTC'
     ],
 
+
     'languages' => [
         'da_DK' => 'da',
         'en_EN' => 'en',

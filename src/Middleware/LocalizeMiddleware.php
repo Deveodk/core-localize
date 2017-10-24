@@ -33,6 +33,10 @@ class LocalizeMiddleware
             Localize::setDefaultTimezone($config['timezones'][$language]);
         }
 
-        return $next($request);
+        $response = $next($request);
+
+        $response->header('content-language', $preferedLanguage);
+
+        return $response;
     }
 }
