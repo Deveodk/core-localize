@@ -10,9 +10,13 @@ if (! function_exists('localize')) {
      * @param null $timezone
      * @return DateTime|null
      */
-    function localize(DateTime $dateTime, $timezone = null)
+    function localize($dateTime, $timezone = null)
     {
         if (is_null($dateTime)) {
+            return null;
+        }
+
+        if (!$dateTime instanceof DateTime) {
             return null;
         }
 
