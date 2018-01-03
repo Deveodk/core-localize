@@ -2,11 +2,11 @@
 
 use DeveoDK\Core\Localize\Models\Localize;
 
-if (! function_exists('localize')) {
+if (!function_exists('localize')) {
 
     /**
      * Convert the given timezone into the current timezone.
-     * @param DateTime $dateTime
+     * @param DateTime|string|int $dateTime
      * @param null $timezone
      * @return DateTime|null
      */
@@ -14,6 +14,22 @@ if (! function_exists('localize')) {
     {
         if (is_null($dateTime)) {
             return null;
+        }
+
+        if (is_int($dateTime)) {
+            try {
+                $dateTime = (new DateTime())->setTimestamp($dateTime);
+            } catch (Exception $exception) {
+                return null;
+            }
+        }
+
+        if (is_string($dateTime)) {
+            try {
+                $dateTime = new DateTime($dateTime);
+            } catch (Exception $exception) {
+                return null;
+            }
         }
 
         if (!$dateTime instanceof DateTime) {
@@ -25,7 +41,9 @@ if (! function_exists('localize')) {
             return $dateTime;
         }
 
-        $dateTime->setTimezone($timezone);
+        $dateTimeZone = new DateTimeZone($timezone);
+        $dateTime->setTimezone($dateTimeZone);
+
         return $dateTime;
     }
 }

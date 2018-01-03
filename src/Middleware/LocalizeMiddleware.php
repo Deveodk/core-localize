@@ -19,13 +19,13 @@ class LocalizeMiddleware
     public function handle($request, Closure $next)
     {
         $config = config('core.localize');
-        $preferedLanguage = $request->getPreferredLanguage();
+        $preferredLanguage = $request->getPreferredLanguage();
 
-        if (!key_exists($preferedLanguage, $config['languages'])) {
+        if (!key_exists($preferredLanguage, $config['languages'])) {
             return $next($request);
         }
 
-        $language = $config['languages'][$preferedLanguage];
+        $language = $config['languages'][$preferredLanguage];
         app()->setLocale($language);
         Carbon::setLocale($language);
 
@@ -35,7 +35,7 @@ class LocalizeMiddleware
 
         $response = $next($request);
 
-        $response->header('content-language', $preferedLanguage);
+        $response->header('content-language', $preferredLanguage);
 
         return $response;
     }

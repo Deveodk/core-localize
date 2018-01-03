@@ -2,17 +2,19 @@
 
 namespace DeveoDK\Core\Localize\Models;
 
+use DateTimeZone;
+
 class Localize
 {
     /** @var string */
     protected static $defaultTimezone = 'UTC';
 
     /**
-     * @return string
+     * @return DateTimeZone
      */
-    public static function getDefaultTimezone(): string
+    public static function getDefaultTimezone(): DateTimeZone
     {
-        return self::$defaultTimezone;
+        return new DateTimeZone(self::$defaultTimezone);
     }
 
     /**
