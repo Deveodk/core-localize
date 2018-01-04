@@ -23,7 +23,7 @@ class LocalizeTest extends TestCase
     {
         $defaultTimezone = Localize::getDefaultTimezone();
 
-        $this->assertEquals('UTC', $defaultTimezone->getName());
+        $this->assertEquals('Europe/Copenhagen', $defaultTimezone->getName());
     }
 
     /**
@@ -33,7 +33,7 @@ class LocalizeTest extends TestCase
     public function canSetDefaultTimezone()
     {
         $defaultTimezone = Localize::getDefaultTimezone();
-        Localize::setDefaultTimezone('Europe/Copenhagen');
+        Localize::setDefaultTimezone('Europe/Stockholm');
 
         $newTimezone = Localize::getDefaultTimezone();
 
