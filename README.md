@@ -9,7 +9,7 @@
 
 > To be used explicitly with Core by Deveo
 
-See the [docs](https://deveodk.github.io/core-manager) for the complete documentation of this Core package.
+See the [docs](https://core-localize.deveo.io) for the complete documentation of this Core package.
 
 ---
 
